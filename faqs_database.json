@@ -1,0 +1,343 @@
+[
+  {
+    "id": "faq_1",
+    "question": "What is the standard return window?",
+    "answer": "Customers may apply for an unconditional return/exchange within 7 days of receipt, must keep the product in its original condition, and are responsible for return shipping costs.",
+    "tags": [
+      "return;policy;guarantee"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.945Z"
+  },
+  {
+    "id": "faq_2",
+    "question": "How long does standard shipping take?",
+    "answer": "Standard shipping typically takes 5-7 business days within the continental US.",
+    "tags": [
+      "shipping;delivery;timeline"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_3",
+    "question": "Where can I find the user manual?",
+    "answer": "Some digital user manual is available on the product support page under the \"Downloads\" tab. If you can't find it, just send email to support@cyberhome.app",
+    "tags": [
+      "manual;documentation;support"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_4",
+    "question": "Is the product compatible with smart home ecosystems like Alexa?",
+    "answer": "Yes, most of our smart appliances are compatible with Amazon Alexa, Google Home, and Apple HomeKit.",
+    "tags": [
+      "smart_home;integration;alexa"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_5",
+    "question": "How do I reset my account password?",
+    "answer": "Click the \"Forgot Password\" link on the login page and follow the instructions sent to your registered email address.",
+    "tags": [
+      "account;password;login"
+    ],
+    "product": "",
+    "priority": 3,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_6",
+    "question": "Do you offer a loyalty program for frequent buyers?",
+    "answer": "Yes, our CyberHome members receive 10% off all future purchases since their first order.",
+    "tags": [
+      "loyalty;discount;marketing"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_7",
+    "question": "Can I track my order status online?",
+    "answer": "Yes, a tracking link will be emailed to you within 24 hours of shipment confirmation.",
+    "tags": [
+      "tracking;delivery;shipping"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_8",
+    "question": "What is the product warranty period?",
+    "answer": "All appliances come with a one-year limited warranty, covering manufacturing defects and failures of normal household function.",
+    "tags": [
+      "warranty;policy;repair"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_9",
+    "question": "How do I process a refund for a damaged item?",
+    "answer": "Please submit a support ticket with photos of the damage. A specialist will review your claim within 48 hours.",
+    "tags": [
+      "refund;damage;claim"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_10",
+    "question": "Does CYBERHOME.APP ship to Canada (CA)?",
+    "answer": "Yes, we currently serve customers in the US and Canada only.",
+    "tags": [
+      "shipping;ca;policy"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_11",
+    "question": "What voltage standard do Canadian customers use?",
+    "answer": "Canada uses the same standard household voltage (110–120V) as the US. All appliances are compatible.",
+    "tags": [
+      "voltage;ca;electric"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_12",
+    "question": "What are the benefits of becoming a member?",
+    "answer": "Members enjoy exclusive discounts, a faster checkout experience, and simplified order tracking. Registration is free.",
+    "tags": [
+      "loyalty;marketing;account"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_13",
+    "question": "What payment methods does CYBERHOME.APP accept?",
+    "answer": "We accept major credit cards (Visa/Mastercard/Amex/Discover), as well as PayPal, Shop Pay, Google Pay, Venmo, etc.",
+    "tags": [
+      "payment;checkout;policy"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_14",
+    "question": "Can I modify or cancel an order I have already placed?",
+    "answer": "Please contact support@cyberhome.app immediately if your order has not shipped. Modifications are not guaranteed, but we will do our best to assist.",
+    "tags": [
+      "modify;cancel;policy"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_15",
+    "question": "Who should I contact for repairs after my warranty period ends?",
+    "answer": "Send email to support@cyberhome.app. Paid replacement parts or repair services can be provided. Customers are responsible for related costs and shipping fees.",
+    "tags": [
+      "repair;support;manufacturer"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_16",
+    "question": "What are the limitations of the AI assistant?",
+    "answer": "The AI assistant only provides FAQs and product information, and cannot handle real-time order cancellation, refunds, or technical troubleshooting.",
+    "tags": [
+      "ai;limitation;support"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_17",
+    "question": "Do you offer financing options for large purchases?",
+    "answer": "Yes, we partner with Shop to offer financial supports.",
+    "tags": [
+      "financing;payment;klarna"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_18",
+    "question": "How do I submit a product feature request?",
+    "answer": "Please visit our Community Forum and post your suggestion under the \"Feature Requests\" section for our development team to review.",
+    "tags": [
+      "feedback;suggestion;community"
+    ],
+    "product": "",
+    "priority": 3,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_19",
+    "question": "What should I do if my shipment is delayed?",
+    "answer": "If your order is significantly past the estimated delivery date, please contact the carrier directly with your tracking number, and then inform our support team.",
+    "tags": [
+      "delayed;shipping;support"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_20",
+    "question": "Are replacement parts available for purchase?",
+    "answer": "Yes, commonly needed replacement parts are available in the \"Spare Parts\" section of our website. For specialized parts, please contact support.",
+    "tags": [
+      "parts;replacement;repair"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_21",
+    "question": "What is CYBERHOME.APP?",
+    "answer": "CYBERHOME.APP is a brand focused on modern home appliances, providing innovative kitchen gadgets, home devices, and smart home solutions, aiming to make modern home life more convenient and intelligent.",
+    "tags": [
+      "brand;about;company"
+    ],
+    "product": "",
+    "priority": 3,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_22",
+    "question": "How can I contact CYBERHOME.APP customer support?",
+    "answer": "You can contact us through our customer service page on the official website, or email support@cyberhome.app, and we will respond promptly.",
+    "tags": [
+      "contact;support;email"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_23",
+    "question": "What voltage do your appliances support?",
+    "answer": "All our appliances are designed to work with standard U.S. & Canada voltage (110V). If you require other voltage specifications, please contact us before making a purchase.",
+    "tags": [
+      "voltage;electric;specs"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_24",
+    "question": "Are your appliances Safety Standard certified?",
+    "answer": "Yes, all our appliances are ETL or equivalent standard certified and comply with relevant safety standards.",
+    "tags": [
+      "safety;standard;ETL"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_25",
+    "question": "What types of kitchen appliances do you offer?",
+    "answer": "We offer a variety of kitchen appliances, including rice cookers, air fryers, juicers, steamers, yogurt makers, and more. You can browse our entire collection on the Products page.",
+    "tags": [
+      "kitchen;offerings;range"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_26",
+    "question": "How do I choose the right appliance for my kitchen?",
+    "answer": "Our products are categorized based on type, functionality, and user needs. Visit our Product Collections page to filter products by category, brand, or price to find the best fit for you.",
+    "tags": [
+      "shopping;advice;guide"
+    ],
+    "product": "",
+    "priority": 3,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_27",
+    "question": "Are your appliances easy to clean?",
+    "answer": "Yes, our products are designed for easy cleaning. Most appliances are dishwasher-safe and have removable parts for convenient cleaning.",
+    "tags": [
+      "cleaning;maintenance;design"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_28",
+    "question": "Do you have any ongoing discounts or offers?",
+    "answer": "Yes, we regularly offer discounts and promotions. You can subscribe to our email list for the latest updates or check our Promotions page for current offers.",
+    "tags": [
+      "discount;promo;offer"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_29",
+    "question": "How do I use a discount code?",
+    "answer": "During checkout, simply enter your discount code in the provided field, and the system will automatically apply the corresponding discount.",
+    "tags": [
+      "checkout;discount;promo"
+    ],
+    "product": "",
+    "priority": 2,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_30",
+    "question": "How do I choose the best rice cooker?",
+    "answer": "Consider the size of your household and the features you need, such as a keep-warm function, quick-cook setting, or smart features. Visit our Rice Cooker Collection to explore all options.",
+    "tags": [
+      "rice_cooker;guide;features"
+    ],
+    "product": "",
+    "priority": 3,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  },
+  {
+    "id": "faq_31",
+    "question": "What is the process for submitting a warranty claim?",
+    "answer": "To submit a warranty claim, please email the original order number, product serial number, and a detailed description of the issue to support@cyberhome.app.",
+    "tags": [
+      "warranty;claim;process"
+    ],
+    "product": "",
+    "priority": 1,
+    "createdAt": "2026-02-11T08:17:35.947Z"
+  }
+]
