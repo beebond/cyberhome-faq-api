@@ -1,8 +1,9 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 app.use(express.json());
 
-// 加载FAQ数据库
+// ============ FAQ 数据库加载 ============
 let faqs = [];
 try {
   faqs = require('./faqs_database.json');
@@ -10,16 +11,17 @@ try {
 } catch (error) {
   console.log('⚠️ FAQ数据库未找到，请先运行: npm run sync');
   console.log('使用空数据库继续运行...');
+  faqs = [];
 }
 
-// 改进的搜索算法
+// ============ 搜索算法（必须导出供 mcp.js 使用） ============
 function searchFAQ(query, options = {}) {
   if (!query || query.trim() === '') return [];
   
   const keywords = query.toLowerCase()
     .split(' ')
     .filter(k => k.length > 1)
-    .map(k => k.replace(/[^\w\u4e00-\u9fff]/g, '')); // 清理特殊字符
+    .map(k => k.replace(/[^\w\u4e00-\u9fff]/g, ''));
   
   if (keywords.length === 0) return [];
   
@@ -39,24 +41,21 @@ function searchFAQ(query, options = {}) {
     
     // 2. 关键词匹配
     keywords.forEach(keyword => {
-      // 问题中的关键词
       const qMatches = (question.match(new RegExp(keyword, 'g')) || []).length;
       score += qMatches * 3;
       
-      // 答案中的关键词
       const aMatches = (answer.match(new RegExp(keyword, 'g')) || []).length;
       score += aMatches * 2;
       
-      // 标签完全匹配
       if (faq.tags.some(tag => tag.toLowerCase() === keyword)) {
         score += 10;
       }
     });
     
-    // 3. 优先级加成（高优先级FAQ排名更高）
-    score += (6 - faq.priority); // priority 1得5分，5得1分
+    // 3. 优先级加成
+    score += (6 - (faq.priority || 5));
     
-    // 4. 答案长度权重（适中的答案更好）
+    // 4. 答案长度权重
     const answerLength = faq.answer.length;
     if (answerLength > 20 && answerLength < 500) {
       score += 2;
@@ -74,14 +73,19 @@ function searchFAQ(query, options = {}) {
   return scoredFAQs
     .filter(item => item.score >= minScore)
     .sort((a, b) => {
-      // 先按分数，再按优先级
       if (b.score !== a.score) return b.score - a.score;
-      return a.priority - b.priority;
+      return (a.priority || 5) - (b.priority || 5);
     })
     .slice(0, maxResults);
 }
 
-// API端点
+// ============ MCP 插件支持（LobeChat官方集成） ============
+// 加载 MCP 插件路由
+const mcpRouter = require('./mcp');
+app.use('/', mcpRouter);
+
+// ============ 原有 API 端点 ============
+// GET 搜索
 app.get('/api/faq/search', (req, res) => {
   const { q, limit = 5, minScore = 1 } = req.query;
   
@@ -114,6 +118,7 @@ app.get('/api/faq/search', (req, res) => {
   });
 });
 
+// POST 搜索
 app.post('/api/faq/search', (req, res) => {
   const { message, sessionId } = req.body;
   
@@ -158,7 +163,9 @@ app.get('/health', (req, res) => {
       'GET  /api/faq/search?q=问题',
       'POST /api/faq/search {message: "问题"}',
       'GET  /health',
-      'GET  /sync-now'
+      'GET  /sync-now',
+      'GET  /.well-known/mcp/manifest.json',
+      'POST /mcp/v1/tools/search_faq'
     ]
   });
 });
@@ -168,6 +175,9 @@ app.get('/sync-now', async (req, res) => {
   try {
     const { syncFAQs } = require('./sync.js');
     const count = await syncFAQs();
+    // 重新加载最新的 FAQ 数据
+    delete require.cache[require.resolve('./faqs_database.json')];
+    faqs = require('./faqs_database.json');
     res.json({ 
       success: true, 
       message: `同步成功，更新了 ${count} 条FAQ`,
@@ -181,7 +191,7 @@ app.get('/sync-now', async (req, res) => {
   }
 });
 
-// 获取所有FAQ（用于调试）
+// 获取所有FAQ（调试用）
 app.get('/api/faq/all', (req, res) => {
   const { limit = 50, offset = 0 } = req.query;
   const result = faqs.slice(parseInt(offset), parseInt(offset) + parseInt(limit));
@@ -194,14 +204,24 @@ app.get('/api/faq/all', (req, res) => {
   });
 });
 
+// ============ 导出供 mcp.js 使用 ============
+module.exports = { searchFAQ, app };
+
+// ============ 启动服务器 ============
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`
 🚀 CyberHome FAQ API 已启动!
 📍 地址: http://localhost:${PORT}
 📚 FAQ数量: ${faqs.length}
-🔍 测试搜索: curl "http://localhost:${PORT}/api/faq/search?q=香薰机"
+🔍 测试搜索: curl "http://localhost:${PORT}/api/faq/search?q=return"
 📊 健康检查: curl "http://localhost:${PORT}/health"
 🔄 手动同步: curl "http://localhost:${PORT}/sync-now"
-  `);
-});
+🤖 MCP 清单: curl "http://localhost:${PORT}/.well-known/mcp/manifest.json"
+🧩 MCP 调用: curl -X POST http://localhost:${PORT}/mcp/v1/tools/search_faq \\
+    -H "Content-Type: application/json" \\
+    -d '{"parameters":{"query":"return policy"}}'
+    `);
+  });
+}

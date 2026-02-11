@@ -1,0 +1,25 @@
+{
+  "identifier": "cyberhome-faq",
+  "version": "1.0.0",
+  "name": "CyberHome 知识库",
+  "description": "查询产品FAQ、售后政策、使用指南、物流信息",
+  "icon": "📚",
+  "author": "CyberHome",
+  "homepage": "https://github.com/beebond/cyberhome-faq-api",
+  "tools": [
+    {
+      "name": "search_faq",
+      "description": "根据用户问题检索FAQ知识库，返回最匹配的答案。支持退货政策、物流时间、产品使用、故障排除等问题。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "用户的问题，例如：'What is the return policy?'、'How long does shipping take?'、'香薰机怎么用？'"
+          }
+        },
+        "required": ["query"]
+      }
+    }
+  ]
+}
