@@ -475,6 +475,55 @@ app.get('/health', (req, res) => {
   });
 });
 
+// ============ 产品详情API（支持型号查询） ============
+app.get('/api/product/model/:model', (req, res) => {
+  const model = req.params.model.toUpperCase();
+  
+  // 在产品主表中查找
+  const product = products.find(p => p.product_id.toUpperCase() === model);
+  
+  if (!product) {
+    return res.status(404).json({ 
+      success: false, 
+      error: '产品型号未找到' 
+    });
+  }
+  
+  // 获取该产品的所有描述片段
+  const descriptions = productDescs.filter(d => d.product_id.toUpperCase() === model);
+  
+  res.json({
+    success: true,
+    product,
+    descriptions: descriptions.slice(0, 10),
+    fullDescription: descriptions.map(d => d.chunk_text).join('\n\n')
+  });
+});
+
+// 添加一个更友好的搜索接口
+app.get('/api/product/search-by-model', (req, res) => {
+  const { q } = req.query;
+  
+  if (!q) {
+    return res.status(400).json({ error: '请提供查询参数 q' });
+  }
+  
+  const query = q.toUpperCase();
+  
+  // 模糊匹配产品ID
+  const matches = products.filter(p => 
+    p.product_id.toUpperCase().includes(query) ||
+    p.title.toUpperCase().includes(query)
+  );
+  
+  res.json({
+    success: true,
+    query: q,
+    totalResults: matches.length,
+    results: matches.slice(0, 5)
+  });
+});
+
 // ============ 导出供 mcp.js 使用 ============
 module.exports = { searchFAQ, searchProducts, app };
 
