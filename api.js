@@ -81,6 +81,10 @@ app.get("/", (req, res) => {
   res.send("CyberHome FAQ API is running.");
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.get("/api/search", (req, res) => {
   const query = req.query.q || "";
   const faqs = readJSON(faqsPath);
