@@ -8,10 +8,11 @@
     "test": "node test-sheet.js"
   },
   "dependencies": {
-    "node-fetch": "^2.6.7",
+    "cors": "^2.8.6",
     "csv-parse": "^5.4.0",
-    "express": "^4.18.0",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "express": "^4.22.1",
+    "node-fetch": "^2.6.7"
   },
   "engines": {
     "node": ">=16.0.0"
