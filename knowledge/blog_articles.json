@@ -1,0 +1,145 @@
+[
+{
+"id":"blog_warm_drinks_1",
+"type":"blog",
+"title":"Why Warm Drinks Support Daily Wellness",
+"category":"warm_drinks",
+"summary":"Warm beverages such as tea, soy milk, and herbal drinks support digestion and comfort, especially in colder seasons or mornings.",
+"url":"https://www.cyberhome.app/blogs/warm-drinks-daily-wellness",
+"topics":["warm drinks","wellness","healthy lifestyle"],
+"related_products":["kettle","nut_milk_maker"],
+"priority":2
+},
+
+{
+"id":"blog_warm_drinks_2",
+"type":"blog",
+"title":"Morning Warm Drinks for Energy and Digestion",
+"category":"warm_drinks",
+"summary":"Starting the day with warm beverages like ginger tea, oat milk, or herbal infusions may help digestion and provide gentle energy.",
+"url":"https://www.cyberhome.app/blogs/warm-drinks-daily-wellness",
+"topics":["morning routine","warm drinks"],
+"related_products":["kettle"],
+"priority":2
+},
+
+{
+"id":"blog_warm_drinks_3",
+"type":"blog",
+"title":"Plant Milk Drinks for Daily Nutrition",
+"category":"warm_drinks",
+"summary":"Plant-based drinks such as almond milk, soy milk, and oat milk are increasingly popular as dairy alternatives.",
+"url":"https://www.cyberhome.app/blogs/warm-drinks-daily-wellness",
+"topics":["plant milk","nutrition"],
+"related_products":["nut_milk_maker"],
+"priority":2
+},
+
+{
+"id":"blog_warm_drinks_4",
+"type":"blog",
+"title":"How to Make Healthy Warm Drinks at Home",
+"category":"warm_drinks",
+"summary":"Making warm drinks at home allows you to control ingredients and create healthier beverages with natural flavors.",
+"url":"https://www.cyberhome.app/blogs/warm-drinks-daily-wellness",
+"topics":["homemade drinks","wellness"],
+"related_products":["kettle","nut_milk_maker"],
+"priority":2
+},
+
+{
+"id":"blog_warm_drinks_5",
+"type":"blog",
+"title":"Warm Drinks for Relaxation and Sleep",
+"category":"warm_drinks",
+"summary":"Certain warm beverages such as herbal tea or warm milk can help create a calming evening routine.",
+"url":"https://www.cyberhome.app/blogs/warm-drinks-daily-wellness",
+"topics":["sleep","relaxation"],
+"related_products":["kettle"],
+"priority":2
+},
+
+{
+"id":"blog_fermentation_1",
+"type":"blog",
+"title":"What is Food Fermentation?",
+"category":"fermentation",
+"summary":"Fermentation is a natural process used to create foods such as yogurt, kefir, and fermented vegetables.",
+"url":"https://www.cyberhome.app/blogs/fermentation-daily-wellness",
+"topics":["fermentation","probiotics"],
+"related_products":["yogurt_maker"],
+"priority":2
+},
+
+{
+"id":"blog_fermentation_2",
+"type":"blog",
+"title":"Health Benefits of Fermented Foods",
+"category":"fermentation",
+"summary":"Fermented foods contain beneficial bacteria that support digestion and gut health.",
+"url":"https://www.cyberhome.app/blogs/fermentation-daily-wellness",
+"topics":["gut health","probiotics"],
+"related_products":["yogurt_maker"],
+"priority":2
+},
+
+{
+"id":"blog_fermentation_3",
+"type":"blog",
+"title":"How to Make Yogurt at Home",
+"category":"fermentation",
+"summary":"Homemade yogurt can be made by fermenting milk at a controlled temperature using starter cultures.",
+"url":"https://www.cyberhome.app/blogs/fermentation-daily-wellness",
+"topics":["yogurt","fermentation"],
+"related_products":["yogurt_maker"],
+"priority":2
+},
+
+{
+"id":"blog_fermentation_4",
+"type":"blog",
+"title":"Beginner Guide to Fermentation",
+"category":"fermentation",
+"summary":"A beginner-friendly introduction to fermentation and how it can be practiced in a modern kitchen.",
+"url":"https://www.cyberhome.app/blogs/fermentation-daily-wellness",
+"topics":["fermentation","kitchen skills"],
+"related_products":["yogurt_maker"],
+"priority":2
+},
+
+{
+"id":"blog_gentle_cooking_1",
+"type":"blog",
+"title":"What is Gentle Cooking?",
+"category":"gentle_cooking",
+"summary":"Gentle cooking refers to lower-temperature cooking methods designed to preserve nutrients and flavor.",
+"url":"https://www.cyberhome.app/blogs/gentle-cooking-daily-wellness",
+"topics":["gentle cooking","nutrition"],
+"related_products":["rice_cooker","electric steamer"],
+"priority":2
+},
+
+{
+"id":"blog_gentle_cooking_2",
+"type":"blog",
+"title":"Why Gentle Cooking is Healthier",
+"category":"gentle_cooking",
+"summary":"Cooking at moderate temperatures can help preserve vitamins and reduce nutrient loss in food.",
+"url":"https://www.cyberhome.app/blogs/gentle-cooking-daily-wellness",
+"topics":["healthy cooking","nutrition"],
+"related_products":["rice_cooker","air_fryer"],
+"priority":2
+},
+
+{
+"id":"blog_gentle_cooking_3",
+"type":"blog",
+"title":"Gentle Cooking for Everyday Meals",
+"category":"gentle_cooking",
+"summary":"Gentle cooking techniques can be applied to daily meals using modern kitchen appliances.",
+"url":"https://www.cyberhome.app/blogs/gentle-cooking-daily-wellness",
+"topics":["home cooking","healthy meals"],
+"related_products":["air_fryer","rice_cooker"],
+"priority":2
+}
+]

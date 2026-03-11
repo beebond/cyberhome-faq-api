@@ -1,0 +1,257 @@
+[
+{
+"id":"faq_shipping_time",
+"type":"faq",
+"title":"Shipping Time",
+"question_variants":[
+"How long does shipping take",
+"Shipping time",
+"Delivery time",
+"When will my order arrive"
+],
+"answer":"Standard shipping typically takes 5–7 business days within the continental United States. Delivery time may vary depending on location and carrier.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["shipping","delivery"],
+"priority":1
+},
+
+{
+"id":"faq_order_tracking",
+"type":"faq",
+"title":"Order Tracking",
+"question_variants":[
+"How can I track my order",
+"Order tracking",
+"Where is my order",
+"Tracking number"
+],
+"answer":"Once your order ships, you will receive a tracking link by email. The tracking information is typically available within 24 hours after shipment.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["shipping","tracking"],
+"priority":1
+},
+
+{
+"id":"faq_return_window",
+"type":"faq",
+"title":"Return Window",
+"question_variants":[
+"What is the return window",
+"How long can I return a product",
+"Return policy time limit",
+"Return period"
+],
+"answer":"Customers may request a return or exchange according to our refund policy. Please refer to the official refund policy page for detailed instructions.",
+"url":"https://www.cyberhome.app/policies/refund-policy",
+"tags":["return","refund","policy"],
+"priority":1
+},
+
+{
+"id":"faq_damaged_product",
+"type":"faq",
+"title":"Damaged Product",
+"question_variants":[
+"What if my product arrives damaged",
+"Damaged item",
+"Broken product refund",
+"Item damaged during shipping"
+],
+"answer":"If your item arrives damaged, please contact our support team with photos of the damage. Our team will review your request and assist with a replacement or refund according to our policy.",
+"url":"https://www.cyberhome.app/policies/refund-policy",
+"tags":["damage","refund","support"],
+"priority":1
+},
+
+{
+"id":"faq_payment_methods",
+"type":"faq",
+"title":"Payment Methods",
+"question_variants":[
+"What payment methods do you accept",
+"Can I pay with PayPal",
+"Credit card payment",
+"Payment options"
+],
+"answer":"CyberHome accepts major credit cards (Visa, Mastercard, American Express, Discover) as well as PayPal, Shop Pay, Google Pay, and other secure checkout options.",
+"url":"https://www.cyberhome.app/policies/terms-of-service",
+"tags":["payment","checkout"],
+"priority":1
+},
+
+{
+"id":"faq_modify_order",
+"type":"faq",
+"title":"Modify or Cancel Order",
+"question_variants":[
+"Can I cancel my order",
+"Modify order",
+"Change my order",
+"Edit order after purchase"
+],
+"answer":"If your order has not yet shipped, please contact support@cyberhome.app as soon as possible. While changes cannot be guaranteed, our team will do our best to assist.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["order","cancel","modify"],
+"priority":1
+},
+
+{
+"id":"faq_contact_support",
+"type":"faq",
+"title":"Customer Support Contact",
+"question_variants":[
+"How do I contact customer service",
+"Support email",
+"Contact CyberHome",
+"Customer service"
+],
+"answer":"You can contact CyberHome customer support via email at support@cyberhome.app.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["support","contact"],
+"priority":1
+},
+
+{
+"id":"faq_shipping_region",
+"type":"faq",
+"title":"Shipping Regions",
+"question_variants":[
+"Do you ship to Canada",
+"Shipping countries",
+"International shipping",
+"Where do you ship"
+],
+"answer":"CyberHome currently ships to customers in the United States and Canada.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["shipping","region"],
+"priority":1
+},
+
+{
+"id":"faq_voltage_standard",
+"type":"faq",
+"title":"Voltage Compatibility",
+"question_variants":[
+"What voltage do your appliances use",
+"Are your appliances compatible with Canada",
+"Electrical compatibility",
+"Power voltage"
+],
+"answer":"All CyberHome appliances are designed for standard North American household voltage (110–120V), compatible with both the United States and Canada.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["voltage","electric"],
+"priority":2
+},
+
+{
+"id":"faq_warranty",
+"type":"faq",
+"title":"Product Warranty",
+"question_variants":[
+"What warranty do you offer",
+"Product warranty period",
+"Warranty coverage",
+"How long is the warranty"
+],
+"answer":"Most appliances include a one-year limited warranty covering manufacturing defects during normal household use.",
+"url":"https://www.cyberhome.app/policies/terms-of-service",
+"tags":["warranty","repair"],
+"priority":1
+},
+
+{
+"id":"faq_warranty_claim",
+"type":"faq",
+"title":"Warranty Claim Process",
+"question_variants":[
+"How do I claim warranty",
+"Warranty request",
+"Submit warranty claim",
+"Warranty repair process"
+],
+"answer":"To request warranty service, please email support@cyberhome.app with your order number, product model, and a description of the issue.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["warranty","support"],
+"priority":1
+},
+
+{
+"id":"faq_replacement_parts",
+"type":"faq",
+"title":"Replacement Parts",
+"question_variants":[
+"Can I buy replacement parts",
+"Spare parts availability",
+"Replacement accessories",
+"Where can I get spare parts"
+],
+"answer":"Some replacement parts may be available for purchase. Please contact our support team for assistance.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["parts","repair"],
+"priority":2
+},
+
+{
+"id":"faq_user_manual",
+"type":"faq",
+"title":"User Manual",
+"question_variants":[
+"Where can I find the user manual",
+"Product manual",
+"Download manual",
+"Instruction manual"
+],
+"answer":"Some product manuals are available on the product support page or can be provided by our support team upon request.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["manual","support"],
+"priority":2
+},
+
+{
+"id":"faq_discount_code",
+"type":"faq",
+"title":"Using Discount Codes",
+"question_variants":[
+"How to use discount code",
+"Apply coupon",
+"Enter promo code",
+"Discount code checkout"
+],
+"answer":"You can enter your discount code during checkout in the discount field. The discount will be applied automatically if the code is valid.",
+"url":"https://www.cyberhome.app/pages/free-vip-discount-access",
+"tags":["discount","checkout"],
+"priority":2
+},
+
+{
+"id":"faq_vip_membership",
+"type":"faq",
+"title":"VIP Discount Program",
+"question_variants":[
+"What is CyberHome VIP",
+"VIP discount",
+"Membership benefits",
+"Free discount program"
+],
+"answer":"CyberHome offers a free VIP discount program. Members can access exclusive promotions and special offers.",
+"url":"https://www.cyberhome.app/pages/free-vip-discount-access",
+"tags":["vip","discount","membership"],
+"priority":1
+},
+
+{
+"id":"faq_product_cleaning",
+"type":"faq",
+"title":"Product Cleaning",
+"question_variants":[
+"Are appliances easy to clean",
+"Cleaning appliances",
+"Dishwasher safe parts",
+"How to clean appliances"
+],
+"answer":"Most CyberHome appliances are designed with removable components and easy-clean materials to simplify maintenance.",
+"url":"https://www.cyberhome.app/pages/about-us",
+"tags":["cleaning","maintenance"],
+"priority":3
+}
+]

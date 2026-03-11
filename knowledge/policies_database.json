@@ -1,0 +1,81 @@
+[
+{
+"id":"policy_about",
+"type":"policy",
+"title":"About CyberHome",
+"question_variants":[
+"What is CyberHome",
+"Who is CyberHome",
+"Tell me about CyberHome",
+"What company runs CyberHome"
+],
+"answer":"CyberHome is a modern home appliance platform focused on carefully selected kitchen and home appliances designed for convenient, healthy, and enjoyable living.",
+"url":"https://www.cyberhome.app/pages/about-us",
+"tags":["brand","company","about"],
+"priority":2
+},
+
+{
+"id":"policy_contact",
+"type":"policy",
+"title":"Contact Information",
+"question_variants":[
+"How can I contact CyberHome",
+"Customer support email",
+"How do I reach support",
+"Contact CyberHome"
+],
+"answer":"You can contact CyberHome customer support by email at support@cyberhome.app. Our team will respond as soon as possible.",
+"url":"https://www.cyberhome.app/policies/contact-information",
+"tags":["contact","support","email"],
+"priority":1
+},
+
+{
+"id":"policy_terms",
+"type":"policy",
+"title":"Terms of Service",
+"question_variants":[
+"Terms of service",
+"Website terms",
+"Legal terms",
+"User agreement"
+],
+"answer":"By using CyberHome.app you agree to the terms and conditions governing the use of our website, services, and products.",
+"url":"https://www.cyberhome.app/policies/terms-of-service",
+"tags":["terms","legal"],
+"priority":3
+},
+
+{
+"id":"policy_refund",
+"type":"policy",
+"title":"Refund Policy",
+"question_variants":[
+"Return policy",
+"Refund policy",
+"How to return a product",
+"Return window"
+],
+"answer":"Customers may request a return or exchange according to our refund policy. Please refer to the official refund policy page for detailed instructions.",
+"url":"https://www.cyberhome.app/policies/refund-policy",
+"tags":["refund","return","policy"],
+"priority":1
+},
+
+{
+"id":"policy_vip",
+"type":"policy",
+"title":"VIP Discount Access",
+"question_variants":[
+"VIP discount",
+"How to get discount",
+"Membership discount",
+"Free VIP discount"
+],
+"answer":"CyberHome offers a free VIP discount program. Users can register to access exclusive member discounts and promotions.",
+"url":"https://www.cyberhome.app/pages/free-vip-discount-access",
+"tags":["vip","discount","membership"],
+"priority":1
+}
+]
