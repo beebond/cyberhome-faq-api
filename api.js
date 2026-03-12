@@ -67,6 +67,15 @@ function tokenize(text) {
     .filter(Boolean);
 }
 
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
+
+function includesAny(haystack, words = []) {
+  const h = normalizeText(haystack);
+  return words.some((w) => w && h.includes(normalizeText(w)));
+}
+
 function uniqueBy(array, key) {
   const seen = new Set();
   const result = [];
@@ -82,24 +91,64 @@ function uniqueBy(array, key) {
   return result;
 }
 
-function normalizeBoolean(value) {
-  if (typeof value === "boolean") return value;
+function dedupeProductsByIdentity(products = []) {
+  const seen = new Set();
+  const result = [];
 
-  const v = normalizeText(value);
+  for (const p of products) {
+    const model = normalizeText(p.model || p.product_id || "");
+    const title = normalizeText(p.title || "");
+    const handle = normalizeText(p.handle || "");
+    const key = model || handle || title;
+    if (!key) continue;
+    if (!seen.has(key)) {
+      seen.add(key);
+      result.push(p);
+    }
+  }
 
-  if (["true", "1", "yes", "y"].includes(v)) return true;
-  if (["false", "0", "no", "n"].includes(v)) return false;
-
-  return null;
+  return result;
 }
 
-function includesAny(haystack, words = []) {
-  const h = normalizeText(haystack);
-  return words.some((w) => w && h.includes(normalizeText(w)));
+function cleanModelToken(value) {
+  return String(value || "")
+    .toUpperCase()
+    .replace(/[^\w\-]/g, "")
+    .trim();
 }
 
-function clamp(n, min, max) {
-  return Math.max(min, Math.min(max, n));
+function extractModelTokens(query) {
+  const raw = String(query || "").toUpperCase();
+  const matches = raw.match(/[A-Z]{1,6}-[A-Z0-9]{2,10}|[A-Z]{2,10}[0-9]{2,10}[A-Z0-9]*/g) || [];
+  const cleaned = matches
+    .map(cleanModelToken)
+    .filter((x) => x.length >= 5);
+
+  return [...new Set(cleaned)];
+}
+
+function hasPartsIntent(query) {
+  const q = normalizeText(query);
+  return (
+    includesAny(q, [
+      "replacement",
+      "replacements",
+      "part",
+      "parts",
+      "accessory",
+      "accessories",
+      "jar",
+      "glass jar",
+      "lid",
+      "seal",
+      "gasket",
+      "配件",
+      "零件",
+      "玻璃杯",
+      "玻璃罐",
+      "盖子",
+    ])
+  );
 }
 
 // =========================
@@ -159,6 +208,7 @@ function detectFamily(query) {
   if (
     q.includes("baby food maker") ||
     q.includes("baby food processor") ||
+    q.includes("baby steamer blender") ||
     q.includes("辅食机")
   ) {
     return "baby_food_maker";
@@ -255,6 +305,8 @@ function detectFamily(query) {
   if (
     q.includes("dough maker") ||
     q.includes("dough mixer") ||
+    q.includes("knead") ||
+    q.includes("bread dough") ||
     q.includes("和面")
   ) {
     return "dough_maker";
@@ -356,6 +408,8 @@ function detectIntent(query) {
     "vacuum",
     "sterilizer",
     "bottle warmer",
+    "baby food maker",
+    "dough maker",
   ];
 
   let intent = "general";
@@ -376,7 +430,7 @@ function detectIntent(query) {
 }
 
 // =========================
-// FAQ 评分
+// FAQ / Policy / Blog 评分
 // =========================
 function scoreFaq(faq, query) {
   const q = normalizeText(query);
@@ -394,7 +448,6 @@ function scoreFaq(faq, query) {
     : "";
 
   let score = 0;
-
   if (!q) return 0;
 
   if (title.includes(q)) score += 12;
@@ -412,13 +465,9 @@ function scoreFaq(faq, query) {
   }
 
   score += Number(faq.priority || 0) * 0.3;
-
   return score;
 }
 
-// =========================
-// Policy 评分
-// =========================
 function scorePolicy(policy, query) {
   const q = normalizeText(query);
   const qWords = tokenize(query);
@@ -434,7 +483,6 @@ function scorePolicy(policy, query) {
     : "";
 
   let score = 0;
-
   if (!q) return 0;
 
   if (title.includes(q)) score += 12;
@@ -450,13 +498,9 @@ function scorePolicy(policy, query) {
   }
 
   score += Number(policy.priority || 0) * 0.3;
-
   return score;
 }
 
-// =========================
-// Blog 评分
-// =========================
 function scoreBlog(blog, query) {
   const q = normalizeText(query);
   const qWords = tokenize(query);
@@ -476,7 +520,6 @@ function scoreBlog(blog, query) {
     : "";
 
   let score = 0;
-
   if (!q) return 0;
 
   if (title.includes(q)) score += 12;
@@ -496,12 +539,11 @@ function scoreBlog(blog, query) {
   }
 
   score += Number(blog.priority || 0) * 0.2;
-
   return score;
 }
 
 // =========================
-// 产品过滤
+// 产品过滤 / 合并
 // =========================
 function isProductActive(product) {
   if (product.active_for_ai === false) return false;
@@ -512,6 +554,16 @@ function isProductActive(product) {
   }
 
   return true;
+}
+
+function normalizeAliases(product = {}) {
+  const aliases = [];
+
+  if (Array.isArray(product.aliases)) aliases.push(...product.aliases);
+  if (Array.isArray(product.alias_models)) aliases.push(...product.alias_models);
+  if (Array.isArray(product.compatible_models)) aliases.push(...product.compatible_models);
+
+  return [...new Set(aliases.map(cleanModelToken).filter(Boolean))];
 }
 
 function getMergedProduct(product) {
@@ -528,19 +580,95 @@ function getMergedProduct(product) {
     use_case: product.use_case || desc.use_case || [],
     ai_tags: product.ai_tags || desc.ai_tags || [],
     category_tree: product.category_tree || desc.category_tree || "",
+    aliases: normalizeAliases(product),
   };
 }
 
+function familyEquivalentMatch(productFamily, detectedFamily) {
+  const pf = normalizeText(productFamily);
+  const df = normalizeText(detectedFamily);
+
+  if (!pf || !df) return false;
+  if (pf === df) return true;
+
+  const equivalents = {
+    pasta_maker: ["dough_maker"],
+    dough_maker: ["pasta_maker"],
+  };
+
+  return Array.isArray(equivalents[df]) && equivalents[df].includes(pf);
+}
+
+function shouldRejectByFamily(product, detectedFamily, partsIntent, modelTokens = []) {
+  if (!detectedFamily) return false;
+
+  const pf = normalizeText(product.product_family || "");
+  const title = normalizeText(product.title || "");
+  const keywords = Array.isArray(product.search_keywords)
+    ? product.search_keywords.map(normalizeText).join(" ")
+    : "";
+  const hay = `${title} ${keywords} ${normalizeText(product.category_tree || "")}`;
+
+  // 型号搜索不做过度拒绝，改为强排序
+  if (modelTokens.length > 0 && (cleanModelToken(product.model) || product.aliases?.length)) {
+    return false;
+  }
+
+  if (detectedFamily === "yogurt_maker") {
+    if (pf === "replacement_parts" && !partsIntent) return true;
+    if (!familyEquivalentMatch(pf, detectedFamily) && pf !== "yogurt_maker") return true;
+    if (!hay.includes("yogurt") && pf !== "yogurt_maker") return true;
+  }
+
+  if (detectedFamily === "baby_food_maker") {
+    if (pf === "replacement_parts" && !partsIntent) return true;
+    if (!familyEquivalentMatch(pf, detectedFamily) && pf !== "baby_food_maker") return true;
+    if (!includesAny(hay, ["baby food", "baby steamer blender", "baby food maker", "baby food processor"])) {
+      return true;
+    }
+  }
+
+  if (detectedFamily === "dough_maker") {
+    if (pf === "replacement_parts" && !partsIntent) return true;
+    if (!["dough_maker", "pasta_maker"].includes(pf)) return true;
+  }
+
+  if (detectedFamily === "juicer") {
+    if (pf !== "juicer") return true;
+  }
+
+  if (detectedFamily === "air_purifier") {
+    if (pf !== "air_purifier") return true;
+  }
+
+  if (detectedFamily === "bottle_warmer") {
+    if (pf === "replacement_parts" && !partsIntent) return true;
+    if (!["bottle_warmer", "baby_food_maker"].includes(pf)) return true;
+  }
+
+  if (detectedFamily === "replacement_parts" && !partsIntent && pf === "replacement_parts") {
+    return true;
+  }
+
+  return false;
+}
+
 // =========================
-// 产品评分
-// =========================
+// 产品评分（V7 precision）
+/* 设计思路：
+ * 1. 型号精确命中 > 家族命中 > 关键词命中
+ * 2. 整机优先，配件默认降权
+ * 3. 明确 family 时尽量只在该 family 内排序
+ */
 function scoreProduct(product, query, detectedFamily = "") {
   const q = normalizeText(query);
   const qWords = tokenize(query);
+  const modelTokens = extractModelTokens(query);
+  const partsIntent = hasPartsIntent(query);
 
   const title = normalizeText(product.title);
   const handle = normalizeText(product.handle);
-  const model = normalizeText(product.model || product.product_id || "");
+  const model = cleanModelToken(product.model || product.product_id || "");
   const family = normalizeText(product.product_family || "");
   const categoryTree = normalizeText(product.category_tree || "");
   const productType = normalizeText(product.product_type || "");
@@ -549,6 +677,7 @@ function scoreProduct(product, query, detectedFamily = "") {
   );
   const bodyText = normalizeText(product.body_text || "");
 
+  const aliases = Array.isArray(product.aliases) ? product.aliases : [];
   const tags = Array.isArray(product.tags) ? product.tags.map(normalizeText) : [];
   const aiTags = Array.isArray(product.ai_tags)
     ? product.ai_tags.map(normalizeText)
@@ -562,25 +691,50 @@ function scoreProduct(product, query, detectedFamily = "") {
   const useCase = Array.isArray(product.use_case)
     ? product.use_case.map(normalizeText)
     : [];
+  const compatibleModels = Array.isArray(product.compatible_models)
+    ? product.compatible_models.map(cleanModelToken)
+    : [];
 
   let score = 0;
 
   if (!q) return 0;
   if (!isProductActive(product)) return -999;
+  if (shouldRejectByFamily(product, detectedFamily, partsIntent, modelTokens)) return -999;
 
+  // 1) 型号命中：最强
+  if (modelTokens.length > 0) {
+    for (const token of modelTokens) {
+      if (model && token === model) score += 180;
+      if (aliases.includes(token)) score += 150;
+      if (compatibleModels.includes(token)) score += family === "replacement_parts" ? 40 : 70;
+      if (title.toUpperCase().includes(token)) score += 80;
+      if (handle.toUpperCase().includes(token)) score += 60;
+    }
+  }
+
+  // 2) 原 query 精确词组命中
   if (title.includes(q)) score += 30;
-  if (model && q.includes(model)) score += 25;
+  if (model && q.includes(model.toLowerCase())) score += 25;
   if (handle.includes(q)) score += 12;
   if (categoryTree.includes(q)) score += 10;
   if (productType.includes(q)) score += 8;
   if (searchKeywords.some((kw) => kw.includes(q) || q.includes(kw))) score += 20;
   if (aiTags.some((kw) => kw.includes(q) || q.includes(kw))) score += 12;
   if (useCase.some((kw) => kw.includes(q) || q.includes(kw))) score += 10;
-  if (family && detectedFamily && family === detectedFamily) score += 18;
 
+  // 3) family 强加权
+  if (detectedFamily) {
+    if (familyEquivalentMatch(family, detectedFamily) || family === detectedFamily) {
+      score += 50;
+    } else {
+      score -= 25;
+    }
+  }
+
+  // 4) 关键词逐词命中
   for (const w of qWords) {
     if (title.includes(w)) score += 6;
-    if (model.includes(w)) score += 5;
+    if (model.toLowerCase().includes(w)) score += 5;
     if (handle.includes(w)) score += 3;
     if (categoryTree.includes(w)) score += 3;
     if (productType.includes(w)) score += 3;
@@ -592,12 +746,37 @@ function scoreProduct(product, query, detectedFamily = "") {
     if (searchKeywords.some((kw) => kw.includes(w))) score += 4;
   }
 
-  if (detectedFamily) {
-    if (family === detectedFamily) {
-      score += 15;
+  // 5) 整机 / 配件排序逻辑
+  if (family === "replacement_parts") {
+    if (partsIntent) {
+      score += 25;
     } else {
-      score -= 8;
+      score -= 120;
     }
+  } else {
+    score += 15;
+  }
+
+  // 6) 某些多功能产品：在 bottle_warmer 查询时 baby_food_maker 可作为次级结果
+  if (detectedFamily === "bottle_warmer" && family === "baby_food_maker") {
+    score += 10;
+  }
+
+  // 7) 明显跨类惩罚
+  if (detectedFamily === "yogurt_maker" && !includesAny(title, ["yogurt"])) {
+    score -= 60;
+  }
+  if (detectedFamily === "baby_food_maker" && !includesAny(title, ["baby food"])) {
+    score -= 50;
+  }
+  if (detectedFamily === "juicer" && !includesAny(title, ["juicer", "cold press"])) {
+    score -= 70;
+  }
+  if (detectedFamily === "air_purifier" && !includesAny(title, ["air purifier"])) {
+    score -= 70;
+  }
+  if (detectedFamily === "dough_maker" && !includesAny(title, ["dough", "pasta", "noodle"])) {
+    score -= 50;
   }
 
   for (const bad of negativeKeywords) {
@@ -607,7 +786,6 @@ function scoreProduct(product, query, detectedFamily = "") {
   }
 
   if (!product.image_url) score -= 2;
-
   score += Number(product.display_priority || 0) * 0.2;
 
   return score;
@@ -676,6 +854,8 @@ function formatProductResult(p) {
     tags: p.tags || [],
     ai_tags: p.ai_tags || [],
     use_case: p.use_case || [],
+    aliases: p.aliases || [],
+    compatible_models: p.compatible_models || [],
     active_for_ai: p.active_for_ai !== false,
     display_priority: p.display_priority || 0,
     score: p.score,
@@ -689,6 +869,7 @@ app.get("/", (req, res) => {
   res.json({
     service: "CyberHome Knowledge API",
     status: "ok",
+    version: "V7",
     loaded_at: LAST_LOADED_AT,
     counts: {
       faqs: FAQS.length,
@@ -703,6 +884,7 @@ app.get("/", (req, res) => {
 app.get("/health", (req, res) => {
   res.json({
     ok: true,
+    version: "V7",
     loaded_at: LAST_LOADED_AT,
     counts: {
       faqs: FAQS.length,
@@ -762,6 +944,7 @@ app.get("/api/search", (req, res) => {
           blogsCount: 0,
           detectedFamily: "",
           detectedIntent: "general",
+          modelTokens: [],
           loadedAt: LAST_LOADED_AT,
         },
       });
@@ -769,6 +952,8 @@ app.get("/api/search", (req, res) => {
 
     const detectedFamily = detectFamily(query);
     const detectedIntent = detectIntent(query);
+    const modelTokens = extractModelTokens(query);
+    const partsIntent = hasPartsIntent(query);
 
     // FAQ
     const faqMatches = FAQS
@@ -782,18 +967,20 @@ app.get("/api/search", (req, res) => {
       .map(formatFaqResult);
 
     // Products
-    const productMatches = PRODUCTS
-      .map((p) => getMergedProduct(p))
-      .filter((p) => isProductActive(p))
-      .map((p) => ({
-        ...p,
-        score: scoreProduct(p, query, detectedFamily),
-      }))
-      .filter((p) => p.score > 0)
-      .sort((a, b) => {
-        if (b.score !== a.score) return b.score - a.score;
-        return Number(b.display_priority || 0) - Number(a.display_priority || 0);
-      })
+    const productMatches = dedupeProductsByIdentity(
+      PRODUCTS
+        .map((p) => getMergedProduct(p))
+        .filter((p) => isProductActive(p))
+        .map((p) => ({
+          ...p,
+          score: scoreProduct(p, query, detectedFamily),
+        }))
+        .filter((p) => p.score > 0)
+        .sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+          return Number(b.display_priority || 0) - Number(a.display_priority || 0);
+        })
+    )
       .slice(0, limitProducts)
       .map(formatProductResult);
 
@@ -832,6 +1019,8 @@ app.get("/api/search", (req, res) => {
         blogsCount: blogMatches.length,
         detectedFamily,
         detectedIntent,
+        modelTokens,
+        partsIntent,
         loadedAt: LAST_LOADED_AT,
       },
     });
@@ -848,5 +1037,5 @@ app.get("/api/search", (req, res) => {
 // 启动
 // =========================
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`[INFO] CyberHome Knowledge API is running on port ${PORT}`);
+  console.log(`[INFO] CyberHome Knowledge API V7 is running on port ${PORT}`);
 });
