@@ -22,6 +22,7 @@ const PRODUCT_DESCRIPTIONS_PATH = path.join(
 );
 const POLICIES_PATH = path.join(KNOWLEDGE_DIR, "policies_database.json");
 const BLOGS_PATH = path.join(KNOWLEDGE_DIR, "blog_articles.json");
+const PRODUCT_SUPPORT_DIR = path.join(KNOWLEDGE_DIR, "products");
 
 // =========================
 // 全局缓存
@@ -31,6 +32,7 @@ let PRODUCTS = [];
 let PRODUCT_DESCRIPTIONS = [];
 let POLICIES = [];
 let BLOGS = [];
+let PRODUCT_SUPPORT_MAP = new Map();
 
 let PRODUCT_DESC_MAP = new Map();
 let LAST_LOADED_AT = null;
@@ -151,6 +153,104 @@ function hasPartsIntent(query) {
   );
 }
 
+
+function loadProductSupportFiles() {
+  PRODUCT_SUPPORT_MAP = new Map();
+
+  try {
+    if (!fs.existsSync(PRODUCT_SUPPORT_DIR)) {
+      console.warn(`[WARN] Product support dir not found: ${PRODUCT_SUPPORT_DIR}`);
+      return;
+    }
+
+    const files = fs.readdirSync(PRODUCT_SUPPORT_DIR).filter((name) => name.endsWith(".json"));
+
+    for (const fileName of files) {
+      const fullPath = path.join(PRODUCT_SUPPORT_DIR, fileName);
+      const data = safeReadJson(fullPath, null);
+
+      if (!data || typeof data !== "object") continue;
+
+      const product = cleanModelToken(data.product || "");
+      const family = normalizeText(data.product_family || "");
+      const entries = Array.isArray(data.entries) ? data.entries : [];
+
+      if (!product && !family) continue;
+
+      const record = {
+        product,
+        product_family: family,
+        entries,
+        fileName,
+      };
+
+      if (product) PRODUCT_SUPPORT_MAP.set(`model:${product}`, record);
+      if (family) PRODUCT_SUPPORT_MAP.set(`family:${family}`, record);
+    }
+  } catch (error) {
+    console.error("[ERROR] Failed to load product support files", error);
+  }
+}
+
+function scoreSupportEntry(entry, query) {
+  const q = normalizeText(query);
+  const qWords = tokenize(query);
+
+  const title = normalizeText(entry.title || entry.question || "");
+  const question = normalizeText(entry.question || "");
+  const answer = normalizeText(entry.answer || "");
+  const keywords = Array.isArray(entry.keywords) ? entry.keywords.map(normalizeText).join(" ") : "";
+
+  let score = 0;
+  if (!q) return 0;
+
+  if (title.includes(q)) score += 12;
+  if (question.includes(q)) score += 14;
+  if (answer.includes(q)) score += 4;
+  if (keywords.includes(q)) score += 16;
+
+  for (const w of qWords) {
+    if (title.includes(w)) score += 3;
+    if (question.includes(w)) score += 4;
+    if (answer.includes(w)) score += 1;
+    if (keywords.includes(w)) score += 5;
+  }
+
+  return score;
+}
+
+function detectSupportRecord(query, detectedFamily = "", modelTokens = []) {
+  for (const token of modelTokens) {
+    const hit = PRODUCT_SUPPORT_MAP.get(`model:${cleanModelToken(token)}`);
+    if (hit) return hit;
+  }
+
+  if (detectedFamily) {
+    const hit = PRODUCT_SUPPORT_MAP.get(`family:${normalizeText(detectedFamily)}`);
+    if (hit) return hit;
+  }
+
+  return null;
+}
+
+function getProductSupportMatches(query, detectedFamily = "", modelTokens = [], limit = 5) {
+  const record = detectSupportRecord(query, detectedFamily, modelTokens);
+  if (!record || !Array.isArray(record.entries)) return [];
+
+  return record.entries
+    .map((entry) => ({
+      ...entry,
+      type: "product_support",
+      score: scoreSupportEntry(entry, query),
+      support_model: record.product || "",
+      support_family: record.product_family || "",
+      source_file: record.fileName || "",
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+}
+
 // =========================
 // 数据加载
 // =========================
@@ -160,6 +260,7 @@ function loadData() {
   PRODUCT_DESCRIPTIONS = safeReadJson(PRODUCT_DESCRIPTIONS_PATH, []);
   POLICIES = safeReadJson(POLICIES_PATH, []);
   BLOGS = safeReadJson(BLOGS_PATH, []);
+  loadProductSupportFiles();
 
   PRODUCT_DESC_MAP = new Map();
 
@@ -177,6 +278,7 @@ function loadData() {
   console.log(`[INFO] Product descriptions: ${PRODUCT_DESCRIPTIONS.length}`);
   console.log(`[INFO] Policies: ${POLICIES.length}`);
   console.log(`[INFO] Blogs: ${BLOGS.length}`);
+  console.log(`[INFO] Product support files: ${PRODUCT_SUPPORT_MAP.size}`);
 }
 
 loadData();
@@ -794,6 +896,24 @@ function scoreProduct(product, query, detectedFamily = "") {
 // =========================
 // 格式化输出
 // =========================
+
+function formatProductSupportResult(entry) {
+  return {
+    id: entry.id || "",
+    type: entry.type || "product_support",
+    title: entry.title || entry.question || "",
+    question: entry.question || entry.title || "",
+    answer: entry.answer || "",
+    url: entry.url || "",
+    tags: entry.tags || [],
+    keywords: entry.keywords || [],
+    support_model: entry.support_model || "",
+    support_family: entry.support_family || "",
+    source_file: entry.source_file || "",
+    score: entry.score || 0,
+  };
+}
+
 function formatFaqResult(faq) {
   return {
     id: faq.id || "",
@@ -869,7 +989,7 @@ app.get("/", (req, res) => {
   res.json({
     service: "CyberHome Knowledge API",
     status: "ok",
-    version: "V7",
+    version: "V7.1",
     loaded_at: LAST_LOADED_AT,
     counts: {
       faqs: FAQS.length,
@@ -877,6 +997,7 @@ app.get("/", (req, res) => {
       descriptions: PRODUCT_DESCRIPTIONS.length,
       policies: POLICIES.length,
       blogs: BLOGS.length,
+      product_support_files: PRODUCT_SUPPORT_MAP.size,
     },
   });
 });
@@ -884,7 +1005,7 @@ app.get("/", (req, res) => {
 app.get("/health", (req, res) => {
   res.json({
     ok: true,
-    version: "V7",
+    version: "V7.1",
     loaded_at: LAST_LOADED_AT,
     counts: {
       faqs: FAQS.length,
@@ -892,6 +1013,7 @@ app.get("/health", (req, res) => {
       descriptions: PRODUCT_DESCRIPTIONS.length,
       policies: POLICIES.length,
       blogs: BLOGS.length,
+      product_support_files: PRODUCT_SUPPORT_MAP.size,
     },
   });
 });
@@ -934,11 +1056,13 @@ app.get("/api/search", (req, res) => {
       return res.json({
         query,
         faqMatches: [],
+        productSupportMatches: [],
         productMatches: [],
         policyMatches: [],
         blogMatches: [],
         meta: {
           faqCount: 0,
+          productSupportCount: 0,
           productsCount: 0,
           policiesCount: 0,
           blogsCount: 0,
@@ -954,17 +1078,26 @@ app.get("/api/search", (req, res) => {
     const detectedIntent = detectIntent(query);
     const modelTokens = extractModelTokens(query);
     const partsIntent = hasPartsIntent(query);
+    const productSupportMatches = getProductSupportMatches(
+      query,
+      detectedFamily,
+      modelTokens,
+      limitFaqs
+    ).map(formatProductSupportResult);
 
     // FAQ
-    const faqMatches = FAQS
-      .map((faq) => ({
-        ...faq,
-        score: scoreFaq(faq, query),
-      }))
-      .filter((faq) => faq.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limitFaqs)
-      .map(formatFaqResult);
+    const faqMatches = [
+      ...productSupportMatches,
+      ...FAQS
+        .map((faq) => ({
+          ...faq,
+          score: scoreFaq(faq, query),
+        }))
+        .filter((faq) => faq.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limitFaqs)
+        .map(formatFaqResult),
+    ].slice(0, limitFaqs);
 
     // Products
     const productMatches = dedupeProductsByIdentity(
@@ -1009,11 +1142,13 @@ app.get("/api/search", (req, res) => {
     return res.json({
       query,
       faqMatches,
+      productSupportMatches,
       productMatches,
       policyMatches,
       blogMatches,
       meta: {
         faqCount: faqMatches.length,
+        productSupportCount: productSupportMatches.length,
         productsCount: productMatches.length,
         policiesCount: policyMatches.length,
         blogsCount: blogMatches.length,
@@ -1037,5 +1172,5 @@ app.get("/api/search", (req, res) => {
 // 启动
 // =========================
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`[INFO] CyberHome Knowledge API V7 is running on port ${PORT}`);
+  console.log(`[INFO] CyberHome Knowledge API V7.1 is running on port ${PORT}`);
 });

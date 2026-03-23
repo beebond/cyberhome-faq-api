@@ -1,0 +1,321 @@
+{
+  "product": "SNJ-C10T1BK",
+  "product_family": "yogurt_maker",
+  "entries": [
+    {
+      "id": "runny_yogurt",
+      "title": "Yogurt is runny or watery",
+      "question": "why is my yogurt runny",
+      "answer": "Runny yogurt is usually caused by low-fat milk, short fermentation time, weak starter culture, or disturbance during fermentation. Use whole milk and extend fermentation to 10–12 hours.",
+      "keywords": ["runny", "watery", "thin", "not thick", "liquid yogurt"]
+    },
+    {
+      "id": "not_set",
+      "title": "Yogurt did not set",
+      "question": "yogurt didn't set",
+      "answer": "This may happen if the starter culture is inactive, the milk temperature is unsuitable, or the fermentation time is too short. Use fresh starter and keep the lid closed during fermentation.",
+      "keywords": ["not set", "didn't set", "still milk", "did not set"]
+    },
+    {
+      "id": "too_sour",
+      "title": "Yogurt too sour",
+      "question": "why is yogurt too sour",
+      "answer": "Over-fermentation causes sour taste. Reduce fermentation time to about 6–8 hours if you prefer a milder flavor.",
+      "keywords": ["too sour", "acidic", "over fermented", "too acidic"]
+    },
+    {
+      "id": "separation",
+      "title": "Yogurt separated",
+      "question": "why yogurt separated",
+      "answer": "Separation or whey on top is normal. You can stir it back in or strain it to make thicker Greek-style yogurt.",
+      "keywords": ["separate", "whey", "liquid on top", "separated"]
+    },
+    {
+      "id": "fermentation_time",
+      "title": "Fermentation time",
+      "question": "how long to ferment yogurt",
+      "answer": "The default yogurt program is about 8 hours. For thicker yogurt, extend fermentation to 10–12 hours. The machine supports longer fermentation up to 24 hours.",
+      "keywords": ["how long", "time", "hours", "ferment", "fermentation time"]
+    },
+    {
+      "id": "temperature",
+      "title": "Fermentation temperature",
+      "question": "what temperature yogurt maker",
+      "answer": "The yogurt maker maintains a suitable fermentation temperature, around 104°F or 40°C for yogurt mode.",
+      "keywords": ["temperature", "degree", "heat", "104f", "40c"]
+    },
+    {
+      "id": "milk_type",
+      "title": "Best milk type",
+      "question": "what milk for yogurt",
+      "answer": "Whole milk gives thicker and creamier yogurt. Low-fat or skim milk usually produces thinner yogurt.",
+      "keywords": ["milk", "whole milk", "low fat", "skim milk", "best milk"]
+    },
+    {
+      "id": "starter_amount",
+      "title": "Starter culture amount",
+      "question": "how much starter yogurt",
+      "answer": "Use about 5g of starter culture, or about 4 tablespoons of plain yogurt as starter, following the manual guidance.",
+      "keywords": ["starter", "culture", "how much", "5g", "4 tablespoons"]
+    },
+    {
+      "id": "preheat_milk",
+      "title": "Preheating milk",
+      "question": "do I need to heat milk",
+      "answer": "If using pasteurized milk, preheating is optional. For best results, keep the milk at or below about 104°F or 40°C before adding starter.",
+      "keywords": ["heat milk", "preheat", "warm milk"]
+    },
+    {
+      "id": "greek_yogurt",
+      "title": "Make Greek yogurt",
+      "question": "how to make greek yogurt",
+      "answer": "Use the Greek yogurt function if available, then strain the yogurt to remove whey for a thicker texture.",
+      "keywords": ["greek yogurt", "strain", "strained yogurt"]
+    },
+    {
+      "id": "plant_milk",
+      "title": "General plant milk use",
+      "question": "can I use plant milk for yogurt",
+      "answer": "Plant-based milk can be used, but results depend heavily on protein content, starter culture, and recipe. Soy milk usually works best among plant milks.",
+      "keywords": ["plant milk", "vegan milk", "non dairy milk", "plant based milk"]
+    },
+    {
+      "id": "lid_open",
+      "title": "Opening lid during fermentation",
+      "question": "can I open yogurt maker",
+      "answer": "Do not open the lid during fermentation unless necessary, because it may disturb temperature stability and affect the result.",
+      "keywords": ["open lid", "interrupt", "open during fermentation"]
+    },
+    {
+      "id": "not_heating",
+      "title": "Machine not heating",
+      "question": "yogurt maker not heating",
+      "answer": "Check the power connection and make sure the machine is properly started. If the problem continues, contact support.",
+      "keywords": ["not heating", "no heat", "doesn't heat"]
+    },
+    {
+      "id": "no_display",
+      "title": "Display not working",
+      "question": "display not working",
+      "answer": "Check whether the power cord is connected securely and try another outlet. If the display still does not light up, contact support.",
+      "keywords": ["no display", "screen off", "display off", "won't turn on"]
+    },
+    {
+      "id": "cleaning",
+      "title": "How to clean",
+      "question": "how to clean yogurt maker",
+      "answer": "Wash the jars and accessories with warm soapy water. Do not immerse the machine base in water.",
+      "keywords": ["clean", "wash", "how to clean"]
+    },
+    {
+      "id": "storage",
+      "title": "How to store yogurt",
+      "question": "how to store yogurt",
+      "answer": "Store finished yogurt in the refrigerator, ideally for up to 5–7 days depending on freshness and ingredients.",
+      "keywords": ["store", "fridge", "refrigerator", "how long store"]
+    },
+    {
+      "id": "best_time",
+      "title": "Best fermentation time",
+      "question": "best time yogurt",
+      "answer": "About 8 hours is typical for regular yogurt. For thicker yogurt, try 10–12 hours.",
+      "keywords": ["best time", "best fermentation time"]
+    },
+    {
+      "id": "yogurt_not_thick",
+      "title": "Yogurt not thick enough",
+      "question": "yogurt not thick enough",
+      "answer": "Use whole milk, make sure your starter is active, and extend fermentation time to 10–12 hours.",
+      "keywords": ["not thick", "not thick enough", "too thin"]
+    },
+    {
+      "id": "overheat",
+      "title": "Overheating concern",
+      "question": "is yogurt maker too hot",
+      "answer": "The machine is designed to maintain a safe fermentation temperature for yogurt. Slight warmth is normal.",
+      "keywords": ["too hot", "overheat", "overheating"]
+    },
+    {
+      "id": "batch_size",
+      "title": "Batch size",
+      "question": "how much yogurt can I make",
+      "answer": "You can make a batch according to the included containers and machine capacity. Follow the fill guidance in the manual and do not overfill.",
+      "keywords": ["how much", "batch size", "capacity"]
+    },
+    {
+      "id": "reuse_starter",
+      "title": "Reuse yogurt as starter",
+      "question": "can I reuse yogurt",
+      "answer": "Yes, you can reuse homemade yogurt as starter for a few batches, but the culture may weaken over time.",
+      "keywords": ["reuse starter", "reuse yogurt", "use old yogurt"]
+    },
+    {
+      "id": "sweet_yogurt",
+      "title": "Add sugar",
+      "question": "can I add sugar",
+      "answer": "For the most reliable fermentation, add sugar after fermentation is complete unless your recipe specifically requires otherwise.",
+      "keywords": ["sugar", "add sugar", "sweeten"]
+    },
+    {
+      "id": "fruit_add",
+      "title": "Add fruit",
+      "question": "can I add fruit",
+      "answer": "It is usually better to add fruit after fermentation. Adding fruit first may affect the fermentation environment.",
+      "keywords": ["fruit", "add fruit", "fruit before fermentation"]
+    },
+    {
+      "id": "noise",
+      "title": "Noise level",
+      "question": "is yogurt maker noisy",
+      "answer": "The yogurt maker is generally quiet during operation because fermentation does not require a motor like a blender does.",
+      "keywords": ["noise", "noisy", "quiet"]
+    },
+    {
+      "id": "power_usage",
+      "title": "Power usage",
+      "question": "power consumption",
+      "answer": "The yogurt maker is a low-power appliance designed for gentle fermentation over time.",
+      "keywords": ["power", "power consumption", "electricity usage"]
+    },
+    {
+      "id": "time_overnight",
+      "title": "Overnight use",
+      "question": "can I leave overnight",
+      "answer": "Yes, overnight fermentation is normal for yogurt making, as long as the machine is used according to instructions.",
+      "keywords": ["overnight", "leave overnight", "overnight use"]
+    },
+    {
+      "id": "container_choice",
+      "title": "Container choice",
+      "question": "can I use other jars",
+      "answer": "Use heat-safe containers that fit properly inside the machine and do not interfere with the lid closing.",
+      "keywords": ["jar", "container", "other jars"]
+    },
+    {
+      "id": "bacteria_health",
+      "title": "Probiotics",
+      "question": "is yogurt healthy",
+      "answer": "Yogurt is commonly valued for probiotics and can be part of a balanced diet, depending on ingredients and personal needs.",
+      "keywords": ["healthy", "probiotic", "gut health"]
+    },
+    {
+      "id": "fermentation_fail",
+      "title": "Fermentation failed",
+      "question": "why fermentation failed",
+      "answer": "Fermentation may fail because of weak starter, unsuitable milk temperature, low protein ingredients, or insufficient fermentation time.",
+      "keywords": ["fail", "failed fermentation", "fermentation failed"]
+    },
+    {
+      "id": "too_hot_room",
+      "title": "Room temperature effect",
+      "question": "room temperature affect yogurt",
+      "answer": "The machine controls the fermentation environment, so room temperature usually has limited impact unless the surrounding conditions are extreme.",
+      "keywords": ["room temp", "room temperature", "ambient temperature"]
+    },
+    {
+      "id": "plant_yogurt_general",
+      "title": "Can I make plant-based yogurt",
+      "question": "can I make plant yogurt",
+      "answer": "Yes, but plant-based milk behaves differently from dairy milk. The yogurt maker mainly provides temperature, so results depend on protein content, culture, and recipe.",
+      "keywords": ["plant yogurt", "vegan yogurt", "non dairy yogurt", "plant based yogurt"]
+    },
+    {
+      "id": "soy_yogurt_supported",
+      "title": "Soy milk yogurt",
+      "question": "can I use soy milk for yogurt",
+      "answer": "Yes, soy milk usually works best among plant milks because it has relatively higher protein. Use unsweetened soy milk and a suitable starter culture.",
+      "keywords": ["soy milk yogurt", "soy yogurt", "soy milk"]
+    },
+    {
+      "id": "almond_milk_thin",
+      "title": "Almond milk yogurt too thin",
+      "question": "why almond milk yogurt is watery",
+      "answer": "Almond milk is usually low in protein, so it often results in thin or watery yogurt. You may need a suitable starter and a thickener for better texture.",
+      "keywords": ["almond milk watery", "almond yogurt thin", "almond milk yogurt", "almond yogurt watery"]
+    },
+    {
+      "id": "coconut_milk_not_setting",
+      "title": "Coconut milk not setting",
+      "question": "coconut milk yogurt not setting",
+      "answer": "Coconut milk may not set well on its own because structure depends on recipe and stabilizing ingredients. Full-fat coconut milk and thickener may help.",
+      "keywords": ["coconut yogurt not set", "coconut milk liquid", "coconut milk yogurt"]
+    },
+    {
+      "id": "oat_milk_issue",
+      "title": "Oat milk yogurt issue",
+      "question": "oat milk yogurt not working",
+      "answer": "Oat milk is often difficult to turn into thick yogurt because it is relatively low in protein. It may require recipe adjustments and thickening support.",
+      "keywords": ["oat milk yogurt", "oat yogurt", "oat milk not working"]
+    },
+    {
+      "id": "plant_milk_protein",
+      "title": "Protein requirement",
+      "question": "why plant yogurt not thick",
+      "answer": "Plant milk often lacks enough protein to build a stable yogurt texture. That is why plant yogurt may stay thin or loose.",
+      "keywords": ["protein", "not thick plant", "plant yogurt thin", "low protein"]
+    },
+    {
+      "id": "plant_need_culture",
+      "title": "Need proper culture",
+      "question": "what starter for plant yogurt",
+      "answer": "Use a starter culture suitable for plant-based yogurt when possible. Regular dairy yogurt starter may not always work reliably with plant milk.",
+      "keywords": ["starter plant", "vegan starter", "plant yogurt starter", "culture for plant yogurt"]
+    },
+    {
+      "id": "plant_need_thickener",
+      "title": "Need thickener",
+      "question": "how to thicken plant yogurt",
+      "answer": "Plant yogurt often needs thickeners such as starch, pectin, agar, or similar stabilizers to achieve a more spoonable texture.",
+      "keywords": ["thicken", "agar", "pectin", "starch", "thicken plant yogurt"]
+    },
+    {
+      "id": "plant_liquid_result",
+      "title": "Result is still liquid",
+      "question": "plant yogurt still liquid",
+      "answer": "If the result stays liquid, the likely causes are low protein content, unsuitable starter, or a recipe that needs thickening support.",
+      "keywords": ["still liquid", "plant yogurt liquid", "vegan yogurt liquid"]
+    },
+    {
+      "id": "plant_separation",
+      "title": "Plant yogurt separation",
+      "question": "plant yogurt separated",
+      "answer": "Separation is common in plant yogurt because plant ingredients usually do not form the same stable protein network as dairy milk.",
+      "keywords": ["separate plant", "layers", "plant yogurt separated", "vegan yogurt separated"]
+    },
+    {
+      "id": "greek_with_plant",
+      "title": "Greek yogurt with plant milk",
+      "question": "can I make greek yogurt with almond milk",
+      "answer": "Greek-style plant yogurt is more difficult because plant milk does not behave like dairy milk during straining. Recipe design matters a lot.",
+      "keywords": ["greek plant yogurt", "greek yogurt almond milk", "greek vegan yogurt"]
+    },
+    {
+      "id": "lactose_free_mix",
+      "title": "Lactose-free and plant milk mix",
+      "question": "can I mix lactose free and almond milk",
+      "answer": "Mixing can be done, but fermentation quality depends on the overall protein and sugar balance of the mixture.",
+      "keywords": ["lactose free mix", "almond milk mix", "mix lactose free milk"]
+    },
+    {
+      "id": "plant_time_longer",
+      "title": "Longer fermentation needed",
+      "question": "plant yogurt fermentation time",
+      "answer": "Plant yogurt may need a longer fermentation time than regular dairy yogurt, sometimes around 12–16 hours depending on the recipe.",
+      "keywords": ["longer time plant", "plant yogurt time", "vegan yogurt fermentation time"]
+    },
+    {
+      "id": "plant_recipe_dependent",
+      "title": "Recipe dependency",
+      "question": "why plant yogurt inconsistent",
+      "answer": "Plant yogurt results depend heavily on the specific recipe, ingredients, and starter. The machine mainly provides temperature support.",
+      "keywords": ["inconsistent", "recipe", "plant yogurt inconsistent", "vegan yogurt inconsistent"]
+    },
+    {
+      "id": "machine_limit",
+      "title": "Machine limitation",
+      "question": "does yogurt maker work for plant milk",
+      "answer": "The yogurt maker provides the fermentation environment, but success with plant milk depends mainly on ingredients, starter culture, and formulation.",
+      "keywords": ["machine plant milk", "does yogurt maker work for plant milk", "plant milk yogurt maker"]
+    }
+  ]
+}
